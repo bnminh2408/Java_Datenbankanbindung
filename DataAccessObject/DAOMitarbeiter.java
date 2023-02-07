@@ -29,12 +29,35 @@ public class DAOMitarbeiter implements DAOInterface<Mitarbeiter> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
 	public int update(Mitarbeiter t) {
-		// TODO Auto-generated method stub
+		try {
+			Connection con = MysqlDatabase.connect();
+			
+			Statement stm = con.createStatement();
+			
+			String query = "UPDATE  mitarbeiter" + 
+						"SET" + 
+						"MitarbeiterNr='"+ t.getMitarbeiterNr()+"'"+
+						"Vorname'"+ t.getVorname()+"'"+
+						"Nachname'"+ t.getNachname()+"'"+
+						"Strasse'"+ t.getStrasse()+"'"+
+						"Plz'"+ t.getPlz()+"'"+
+						"Ort'"+ t.getOrt()+"'"+
+						"Telefon'"+ t.getTelefon()+"'"+
+						"Email'"+ t.getEmail()+"'";
+			
+			int result = stm.executeUpdate(query);
+			
+			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
+			System.out.println("Es wurden: " + result + " Daten hinzugefuegt.");
+			MysqlDatabase.disconnect(con);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
