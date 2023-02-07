@@ -9,27 +9,27 @@ public class Main {
 	public static void main(String[] args) 	 {
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Bitte Vorname eingeben: ");
-		String vorname = sc.nextLine();
-		System.out.println("Bitte ID eingeben: ");
-		int id = sc.nextInt();
-		System.out.println("Bitte Nachname eingen: ");
-		String nachname = sc.nextLine();
-		System.out.println("Bitte Strasse eingeben: ");
-		String strasse = sc.nextLine();
-		System.out.println("Bitte Plz eingeben: ");
-		String plz = sc.nextLine();
-		System.out.println("Bitte Ort eingeben: ");
-		String ort = sc.nextLine();
-		System.out.println("Bitte Telefon eingeben: ");
-		String telefon = sc.nextLine();
-		System.out.println("Bitte Email eingeben: ");
-		String email = sc.nextLine();
+		int id = Integer.parseInt(inputValues("Bitte ID eingeben: ",sc));
+		String vorname = inputValues("Bitte Vorname eingeben: ",sc);
+		String nachname = inputValues("Bitte Nachname eingeben: ",sc);
+		String strasse = inputValues("Bitte Strasse eingeben: ",sc);
+		String plz = inputValues("Bitte Plz eingeben: ",sc);
+		String ort = inputValues("Bitte Ort eingeben: ",sc);
+		String telefon = inputValues("Bitte Telefon eingeben: ",sc);
+		String email = inputValues("Bitte Email eingeben: ",sc);
 		sc.close();
-		
+
 		Mitarbeiter mi = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email);
 		
 		
 		
+	}
+
+	public static String inputValues(String text, Scanner sc){
+		
+		System.out.print(text);
+		String input = sc.nextLine();
+		
+		return input;
 	}
 }
