@@ -1,16 +1,17 @@
 package Test;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 import DataAccessObject.DAOMitarbeiter;
+import Database.MysqlDatabase;
 import model.Mitarbeiter;
 
 public class Main {
 
 	public static void main(String[] args) 	 {
 		
-		Scanner sc = new Scanner(System.in);
-<<<<<<< Updated upstream
+		/* Scanner sc = new Scanner(System.in);
 		int id = Integer.parseInt(inputValues("Bitte ID eingeben: ",sc));
 		String vorname = inputValues("Bitte Vorname eingeben: ",sc);
 		String nachname = inputValues("Bitte Nachname eingeben: ",sc);
@@ -19,43 +20,29 @@ public class Main {
 		String ort = inputValues("Bitte Ort eingeben: ",sc);
 		String telefon = inputValues("Bitte Telefon eingeben: ",sc);
 		String email = inputValues("Bitte Email eingeben: ",sc);
-=======
+		sc.close(); */
 
-		int id = Integer.parseInt(input("Bitte ID eingeben: ",sc));
-		String vorname = input("Bitte Vorname eingeben: ", sc);
-		String nachname = input("Bitte Nachname eingen: ", sc);
-		String strasse = input("Bitte Strasse eingeben: ", sc);
-		String plz = input("Bitte Plz eingeben: ", sc);
-		String ort = input("Bitte Ort eingeben: ", sc);
-		String telefon = input("Bitte Telefon eingeben: ", sc);
-		String email = input("Bitte Email eingeben: ", sc);
+		//Mitarbeiter mi = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email);
+		//System.out.println(mi);
+		// Test 
+		//Connection database = MysqlDatabase.connect();
 
->>>>>>> Stashed changes
-		sc.close();
-
-		Mitarbeiter mi = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email);
-		System.out.println(mi);
-		// Test Update
-		DAOMitarbeiter test =  new DAOMitarbeiter();
-		test.update(mi);
+		Mitarbeiter mit1 = new Mitarbeiter(10,"b","f","f","f","f","f","w");
 		
+		DAOMitarbeiter test =  new DAOMitarbeiter();
+		Mitarbeiter mitarbeiter = test.selectById(mit1);
+		System.out.println(mitarbeiter.toString());
 		// Test Insert
-		DAOMitarbeiter test1 = new DAOMitarbeiter();
+		DAOMitarbeiter test1 = new DAOMitarbeiter(); 
 		
 		
 	}
-<<<<<<< Updated upstream
 
 	public static String inputValues(String text, Scanner sc){
 		
 		System.out.print(text);
 		String input = sc.nextLine();
 		
-=======
-	public static String input(String t, Scanner sc ){
-		System.out.println(t);
-		String input = sc.nextLine();
->>>>>>> Stashed changes
 		return input;
 	}
 }

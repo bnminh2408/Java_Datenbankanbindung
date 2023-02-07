@@ -12,6 +12,6 @@ public interface DAOInterface<T> {
 
 	public ArrayList<T> selectAll();
 
-	public T selectById();
+	public T selectById(T t);
 
 }
