@@ -13,6 +13,7 @@ public class Main {
 
 	public static void main(String[] args) 	 {
 		
+<<<<<<< HEAD
 //		System.out.println();
 //		int input;
 //		
@@ -47,6 +48,10 @@ public class Main {
 		
 		
 		/* Scanner sc = new Scanner(System.in);
+=======
+
+		Scanner sc = new Scanner(System.in);
+>>>>>>> 033b595558bfdce1d993bc5066d76c5853dbe049
 		int id = Integer.parseInt(inputValues("Bitte ID eingeben: ",sc));
 		String vorname = inputValues("Bitte Vorname eingeben: ",sc);
 		String nachname = inputValues("Bitte Nachname eingeben: ",sc);
@@ -55,6 +60,7 @@ public class Main {
 		String ort = inputValues("Bitte Ort eingeben: ",sc);
 		String telefon = inputValues("Bitte Telefon eingeben: ",sc);
 		String email = inputValues("Bitte Email eingeben: ",sc);
+<<<<<<< HEAD
 		sc.close(); */
 
 		//Mitarbeiter mi = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email);
@@ -69,6 +75,18 @@ public class Main {
 //		System.out.println(mitarbeiter.toString());
 //		// Test Insert
 //		DAOMitarbeiter test1 = new DAOMitarbeiter(); 
+=======
+
+		Mitarbeiter mit1 = new Mitarbeiter(10,"b","f","f","f","f","f","w");
+
+		sc.close();
+
+		Mitarbeiter mi = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email);
+		System.out.println(mi);
+		// Test Update
+		DAOMitarbeiter test =  new DAOMitarbeiter();
+		test.update(mi);
+>>>>>>> 033b595558bfdce1d993bc5066d76c5853dbe049
 		
 		// test DELETE
 //		Mitarbeiter m1 = new Mitarbeiter();
