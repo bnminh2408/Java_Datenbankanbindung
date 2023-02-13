@@ -22,4 +22,11 @@ public class ExterneMitarbeiter extends Mitarbeiter {
 	public void setFirma(String firma) {
 		this.firma = firma;
 	}
+
+	@Override
+	public String toString() {
+		return "ExterneMitarbeiter [firma=" + firma + "]";
+	}
+	
+	
 }

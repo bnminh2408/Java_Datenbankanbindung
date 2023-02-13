@@ -1,13 +1,6 @@
 package model;
 
 public class Mitarbeiter {
-	
-	@Override
-	public String toString() {
-		return "Mitarbeiter [mitarbeiterNr=" + mitarbeiterNr + ", vorname=" + vorname + ", nachname=" + nachname
-				+ ", strasse=" + strasse + ", plz=" + plz + ", ort=" + ort + ", telefon=" + telefon + ", email=" + email
-				+ "]";
-	}
 
 	private int mitarbeiterNr;
 	private String vorname, nachname, strasse, plz, ort, telefon, email;
@@ -89,5 +82,12 @@ public class Mitarbeiter {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@Override
+	public String toString() {
+		return "Mitarbeiter [mitarbeiterNr=" + mitarbeiterNr + ", vorname=" + vorname + ", nachname=" + nachname
+				+ ", strasse=" + strasse + ", plz=" + plz + ", ort=" + ort + ", telefon=" + telefon + ", email=" + email
+				+ "]";
 	}
 }

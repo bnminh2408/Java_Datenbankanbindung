@@ -24,7 +24,6 @@ public class MysqlDatabase {
 		Connection connection = null;
 		try {
 			connection = DriverManager.getConnection(url, username, password);
-			System.out.println(connection);
 			System.out.println("Successfully connected to database.");
 		} catch (SQLException ex) {
 			ex.printStackTrace();
