@@ -1,120 +1,195 @@
 package Test;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import DataAccessObject.DAOExterneMitarbeiter;
+import DataAccessObject.DAOKunde;
 import DataAccessObject.DAOMitarbeiter;
-import Database.MysqlDatabase;
+import model.ExterneMitarbeiter;
 import model.Kunden;
 import model.Mitarbeiter;
 
 public class Main {
 
-	public static void main(String[] args) 	 {
-		
-<<<<<<< HEAD
-//		System.out.println();
-//		int input;
-//		
-//		
-//		Mitarbeiter mitarbeiter1 = new Mitarbeiter();
-//		DAOMitarbeiter daoMitarbeiter = new DAOMitarbeiter();
-//		
-//		Scanner sc = new Scanner(System.in);
-//		
-//		switch (input = Integer.parseInt(inputValues("Bitte waehlen Sie folgende fuktionen:\n"
-//				+ "(1) Neue Daten hinzufuegen\n"
-//				+ "(2) Daten loeschen", sc))){
-//		case 1: {
-//			int id = Integer.parseInt(inputValues("Bitte ID eingeben: ",sc));
-//			String vorname = inputValues("Bitte Vorname eingeben: ",sc);
-//			String nachname = inputValues("Bitte Nachname eingeben: ",sc);
-//			String strasse = inputValues("Bitte Strasse eingeben: ",sc);
-//			String plz = inputValues("Bitte Plz eingeben: ",sc);
-//			String ort = inputValues("Bitte Ort eingeben: ",sc);
-//			String telefon = inputValues("Bitte Telefon eingeben: ",sc);
-//			String email = inputValues("Bitte Email eingeben: ",sc);
-//			
-//			daoMitarbeiter.insert(mitarbeiter1 = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email));
-//			System.out.println();
-//			System.out.println("Sie haben folgenden Daten hizugefuegt: " + mitarbeiter1);
-//			
-//			break;
-//		}
-//		case 2:
-//			mitarbeiter1.setMitarbeiterNr(input = Integer.parseInt(inputValues("kkkk", sc)));
-//		}
-		
-		
-		/* Scanner sc = new Scanner(System.in);
-=======
+	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
->>>>>>> 033b595558bfdce1d993bc5066d76c5853dbe049
-		int id = Integer.parseInt(inputValues("Bitte ID eingeben: ",sc));
-		String vorname = inputValues("Bitte Vorname eingeben: ",sc);
-		String nachname = inputValues("Bitte Nachname eingeben: ",sc);
-		String strasse = inputValues("Bitte Strasse eingeben: ",sc);
-		String plz = inputValues("Bitte Plz eingeben: ",sc);
-		String ort = inputValues("Bitte Ort eingeben: ",sc);
-		String telefon = inputValues("Bitte Telefon eingeben: ",sc);
-		String email = inputValues("Bitte Email eingeben: ",sc);
-<<<<<<< HEAD
-		sc.close(); */
 
-		//Mitarbeiter mi = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email);
-		//System.out.println(mi);
-		// Test 
-		//Connection database = MysqlDatabase.connect();
-		//Test SelectById
-//		Mitarbeiter mit1 = new Mitarbeiter(10,"b","f","f","f","f","f","w");
-//		
-//		DAOMitarbeiter test =  new DAOMitarbeiter();
-//		Mitarbeiter mitarbeiter = test.selectById(mit1);
-//		System.out.println(mitarbeiter.toString());
-//		// Test Insert
-//		DAOMitarbeiter test1 = new DAOMitarbeiter(); 
-=======
+		Mitarbeiter mitarbeiter = new Mitarbeiter();
+		ExterneMitarbeiter externeMitarbeiter = new ExterneMitarbeiter();
+		Kunden kunden = new Kunden();
 
-		Mitarbeiter mit1 = new Mitarbeiter(10,"b","f","f","f","f","f","w");
+		DAOMitarbeiter daoMitarbeiter = new DAOMitarbeiter();
+		DAOExterneMitarbeiter daoExterneMitarbeiter = new DAOExterneMitarbeiter();
+		DAOKunde daoKunden = new DAOKunde();
 
-		sc.close();
+		ArrayList<Mitarbeiter> listMitarbeiter = daoMitarbeiter.selectAll();
+		ArrayList<ExterneMitarbeiter> listExterneMitarbeiter = daoExterneMitarbeiter.selectAll();
+		ArrayList<Kunden> listKunden = daoKunden.selectAll();
 
-		Mitarbeiter mi = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email);
-		System.out.println(mi);
-		// Test Update
-		DAOMitarbeiter test =  new DAOMitarbeiter();
-		test.update(mi);
->>>>>>> 033b595558bfdce1d993bc5066d76c5853dbe049
-		
-		// test DELETE
-//		Mitarbeiter m1 = new Mitarbeiter();
-//		m1.setMitarbeiterNr(13);
-//		DAOMitarbeiter testDelete = new DAOMitarbeiter();
-//		testDelete.delete(m1);
-		// Test Array
-		DAOMitarbeiter test = new DAOMitarbeiter();
-		ArrayList<Mitarbeiter> list = test.selectAll();
-		
-		for (Mitarbeiter mitarbeiter : list) {
-			
-			System.out.println(mitarbeiter.toString());
-			
+		int input;
+		boolean weiterMachen = true;
+		// ab hier
+		while (weiterMachen) {
+			switch (input = Integer.parseInt(inputValues(
+					"Weche folgende Daten moechten sie bearbeiten:\n" + "(1) Mitarbeiter\n" + "(2) Externe Mitarbeiter\n"
+							+ "(3) Kunden\n" + "(4) Quit\n" + "Bitte nur Zahlen von 1 bis 4 eingeben: ",
+					sc))) {
+			case 1: {
+				switch (input = Integer
+						.parseInt(inputValues("Was moechten sie tun ?\n" + "(1) Insert\n" + "(2) Delete\n"
+								+ "(3) Select All\n" + "(4) Select by ID\n" + "Bitte nur Zahlen von 1 bis 4 eingeben: ", sc))) {
+				case 1: {
+					int id = Integer.parseInt(inputValues("Bitte ID eingeben: ", sc));
+					String vorname = inputValues("Bitte Vorname eingeben: ", sc);
+					String nachname = inputValues("Bitte Nachname eingeben: ", sc);
+					String strasse = inputValues("Bitte Strasse eingeben: ", sc);
+					String plz = inputValues("Bitte Plz eingeben: ", sc);
+					String ort = inputValues("Bitte Ort eingeben: ", sc);
+					String telefon = inputValues("Bitte Telefon eingeben: ", sc);
+					String email = inputValues("Bitte Email eingeben: ", sc);
+
+					daoMitarbeiter.insert(
+							mitarbeiter = new Mitarbeiter(id, vorname, nachname, strasse, plz, ort, telefon, email));
+					System.out.println();
+					System.out.println("Sie haben folgenden Daten hizugefuegt: " + mitarbeiter);
+
+					break;
+				}
+				case 2: {
+					mitarbeiter.setMitarbeiterNr(input = Integer
+							.parseInt(inputValues("Sie möchte Mitarbeiter mit welche ID loeschen:...", sc)));
+					daoMitarbeiter.delete(mitarbeiter);
+					break;
+				}
+				case 3: {
+					for (Mitarbeiter elemente : listMitarbeiter) {
+						System.out.println(elemente.toString());
+					}
+					break;
+				}
+				case 4: {
+					mitarbeiter.setMitarbeiterNr(
+							input = Integer.parseInt(inputValues("Sie moechte Mitarbeiter mit ID:  ", sc)));
+					Mitarbeiter findMitarbeiter = daoMitarbeiter.selectById(mitarbeiter);
+					System.out.println(findMitarbeiter);
+					break;
+				}
+				}
+
+				break;
+			}
+			case 2: {
+				switch (input = Integer
+						.parseInt(inputValues("Was moechten sie tun ?\n" + "(1) Insert\n" + "(2) Delete\n"
+								+ "(3) Select All\n" + "(4) Select by ID\n" + "Bitte nur Zahlen eingeben: ", sc))) {
+				case 1: {
+					int id = Integer.parseInt(inputValues("Bitte ID eingeben: ", sc));
+					String vorname = inputValues("Bitte Vorname eingeben: ", sc);
+					String nachname = inputValues("Bitte Nachname eingeben: ", sc);
+					String strasse = inputValues("Bitte Strasse eingeben: ", sc);
+					String plz = inputValues("Bitte Plz eingeben: ", sc);
+					String ort = inputValues("Bitte Ort eingeben: ", sc);
+					String telefon = inputValues("Bitte Telefon eingeben: ", sc);
+					String email = inputValues("Bitte Email eingeben: ", sc);
+					String firma = inputValues("Bitte Firma angeben: ", sc);
+
+					daoExterneMitarbeiter.insert(externeMitarbeiter = new ExterneMitarbeiter(id, vorname, nachname,
+							strasse, plz, ort, telefon, email, firma));
+					System.out.println();
+					System.out.println("Sie haben folgenden Daten hizugefuegt: " + externeMitarbeiter);
+
+					break;
+				}
+				case 2: {
+					externeMitarbeiter.setMitarbeiterNr(input = Integer
+							.parseInt(inputValues("Sie moechte externe Mitarbeiter mit welche ID loeschen:... ", sc)));
+					daoMitarbeiter.delete(externeMitarbeiter);
+					break;
+				}
+				case 3: {
+					for (ExterneMitarbeiter elemente : listExterneMitarbeiter) {
+						System.out.println(elemente.toString());
+					}
+					break;
+				}
+				case 4: {
+
+					externeMitarbeiter.setMitarbeiterNr(
+							input = Integer.parseInt(inputValues("Sie suchen externe Mitarbeiter mit ID:  ", sc)));
+					ExterneMitarbeiter findMitarbeiter = daoExterneMitarbeiter.selectById(externeMitarbeiter);
+					System.out.println(findMitarbeiter);
+					break;
+				}
+				}
+
+				break;
+			}
+			case 3: {
+				switch (input = Integer
+						.parseInt(inputValues("Was moechten sie tun ?\n" + "(1) Insert\n" + "(2) Delete\n"
+								+ "(3) Select All\n" + "(4) Select by ID\n" + "Bitte nur Zahlen eingeben: ", sc))) {
+				case 1: {
+					int id = Integer.parseInt(inputValues("Bitte ID eingeben: ", sc));
+					String vorname = inputValues("Bitte Vorname eingeben: ", sc);
+					String nachname = inputValues("Bitte Nachname eingeben: ", sc);
+					String strasse = inputValues("Bitte Strasse eingeben: ", sc);
+					String plz = inputValues("Bitte Plz eingeben: ", sc);
+					String ort = inputValues("Bitte Ort eingeben: ", sc);
+					String telefon = inputValues("Bitte Telefon eingeben: ", sc);
+					String email = inputValues("Bitte Email eingeben: ", sc);
+					String branche = inputValues("Bitte Branche eingeben: ", sc);
+
+					daoKunden.insert(
+							kunden = new Kunden(id, vorname, nachname, strasse, plz, ort, telefon, email, branche));
+					System.out.println();
+					System.out.println("Sie haben folgenden Daten hizugefuegt: " + kunden);
+
+					break;
+				}
+				case 2: {
+					kunden.setKundenNr(
+							input = Integer.parseInt(inputValues("Sie möchte Kunden mit welche ID loeschen:...", sc)));
+					daoKunden.delete(kunden);
+					break;
+				}
+				case 3: {
+					for (Kunden elemente : listKunden) {
+						System.out.println(elemente.toString());
+					}
+					break;
+				}
+				case 4: {
+					kunden.setKundenNr(input = Integer.parseInt(inputValues("Sie moechte Kunden mit ID:  ", sc)));
+					Kunden findKunden = daoKunden.selectById(kunden);
+					System.out.println(findKunden);
+					break;
+				}
+				}
+
+				break;
+			}
+			case 4: {
+				weiterMachen = false;
+				System.out.println("Das Program ist beendet.");
+			}
+			default:
+					System.out.println("");
+				
+				
+				
+			}
+// bis hier
 		}
-		
-	Kunden ku = new Kunden();
-	ku.setMitarbeiterNr(1);
-	System.out.println(ku.getMitarbeiterNr());
-		
-		
+
 	}
 
-	public static String inputValues(String text, Scanner sc){
-		
+	public static String inputValues(String text, Scanner sc) {
+
 		System.out.print(text);
 		String input = sc.nextLine();
-		
+
 		return input;
 	}
 }
