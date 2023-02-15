@@ -6,10 +6,10 @@ import java.util.Scanner;
 import DataAccessObject.DAOExterneMitarbeiter;
 import DataAccessObject.DAOKunde;
 import DataAccessObject.DAOMitarbeiter;
+import inputandprocess.UserInput;
 import model.ExterneMitarbeiter;
 import model.Kunden;
 import model.Mitarbeiter;
-import input.UserInput;
 
 public class Main {
 
@@ -31,23 +31,19 @@ public class Main {
 
 		int input;
 		boolean weiterMachen = true;
-		// ab hier
 
 		UserInput userInput = new UserInput();
-		
+		// ab hier
 		while (weiterMachen) {
-			switch (input = Integer.parseInt(userInput.inputValues(
-					"Weche folgende Daten moechten sie bearbeiten:\n" + "(1) Mitarbeiter\n" + "(2) Externe Mitarbeiter\n"
-							+ "(3) Kunden\n" + "(4) Quit\n" + "Bitte nur Zahlen von 1 bis 4 eingeben: ",
-					sc))) {
+			switch (userInput.firstProcess()) {
 			case 1: {
-				switch (input = Integer
-						.parseInt(userInput.inputValues("Was moechten sie tun ?\n" + "(1) Insert\n" + "(2) Delete\n"
-								+ "(3) Select All\n" + "(4) Select by ID\n" + "Bitte nur Zahlen von 1 bis 4 eingeben: ", sc))) {
+				// ab hier
+
+				switch (userInput.secondProcess()) {
 				case 1: {
 					mitarbeiter = userInput.setMitarbeiter(sc);
 
-					daoMitarbeiter.insert( mitarbeiter);
+					daoMitarbeiter.insert(mitarbeiter);
 					System.out.println();
 					System.out.println("Sie haben folgenden Daten hizugefuegt: " + mitarbeiter);
 
@@ -55,7 +51,7 @@ public class Main {
 				}
 				case 2: {
 					mitarbeiter.setMitarbeiterNr(input = Integer
-							.parseInt(userInput.inputValues("Sie möchte Mitarbeiter mit welche ID loeschen:...", sc)));
+							.parseInt(userInput.inputValues("Sie möchte Mitarbeiter mit welche ID loeschen: ", sc)));
 					daoMitarbeiter.delete(mitarbeiter);
 					break;
 				}
@@ -73,13 +69,11 @@ public class Main {
 					break;
 				}
 				}
-
 				break;
+
 			}
 			case 2: {
-				switch (input = Integer
-						.parseInt(userInput.inputValues("Was moechten sie tun ?\n" + "(1) Insert\n" + "(2) Delete\n"
-								+ "(3) Select All\n" + "(4) Select by ID\n" + "Bitte nur Zahlen eingeben: ", sc))) {
+				switch (userInput.secondProcess()) {
 				case 1: {
 					externeMitarbeiter = userInput.setExterneMitarbeiter(sc);
 
@@ -89,8 +83,8 @@ public class Main {
 					break;
 				}
 				case 2: {
-					externeMitarbeiter.setMitarbeiterNr(input = Integer
-							.parseInt(userInput.inputValues("Sie moechte externe Mitarbeiter mit welche ID loeschen:... ", sc)));
+					externeMitarbeiter.setMitarbeiterNr(input = Integer.parseInt(
+							userInput.inputValues("Sie moechte externe Mitarbeiter mit welche ID loeschen:  ", sc)));
 					daoMitarbeiter.delete(externeMitarbeiter);
 					break;
 				}
@@ -102,8 +96,8 @@ public class Main {
 				}
 				case 4: {
 
-					externeMitarbeiter.setMitarbeiterNr(
-							input = Integer.parseInt(userInput.inputValues("Sie suchen externe Mitarbeiter mit ID:  ", sc)));
+					externeMitarbeiter.setMitarbeiterNr(input = Integer
+							.parseInt(userInput.inputValues("Sie suchen externe Mitarbeiter mit ID:  ", sc)));
 					ExterneMitarbeiter findMitarbeiter = daoExterneMitarbeiter.selectById(externeMitarbeiter);
 					System.out.println(findMitarbeiter);
 					break;
@@ -113,22 +107,20 @@ public class Main {
 				break;
 			}
 			case 3: {
-				switch (input = Integer
-						.parseInt(userInput.inputValues("Was moechten sie tun ?\n" + "(1) Insert\n" + "(2) Delete\n"
-								+ "(3) Select All\n" + "(4) Select by ID\n" + "Bitte nur Zahlen eingeben: ", sc))) {
+				switch (userInput.secondProcess()) {
 				case 1: {
 					kunden = userInput.setKunden(sc);
 
 					daoKunden.insert(kunden);
-							
+
 					System.out.println();
 					System.out.println("Sie haben folgenden Daten hizugefuegt: " + kunden);
 
 					break;
 				}
 				case 2: {
-					kunden.setKundenNr(
-							input = Integer.parseInt(userInput.inputValues("Sie möchte Kunden mit welche ID loeschen:...", sc)));
+					kunden.setKundenNr(input = Integer
+							.parseInt(userInput.inputValues("Sie möchte Kunden mit welche ID loeschen: ", sc)));
 					daoKunden.delete(kunden);
 					break;
 				}
@@ -139,7 +131,8 @@ public class Main {
 					break;
 				}
 				case 4: {
-					kunden.setKundenNr(input = Integer.parseInt(userInput.inputValues("Sie moechte Kunden mit ID:  ", sc)));
+					kunden.setKundenNr(
+							input = Integer.parseInt(userInput.inputValues("Sie moechte Kunden mit ID:  ", sc)));
 					Kunden findKunden = daoKunden.selectById(kunden);
 					System.out.println(findKunden);
 					break;
@@ -153,10 +146,8 @@ public class Main {
 				System.out.println("Das Program ist beendet.");
 			}
 			default:
-					System.out.println("");
-				
-				
-				
+				System.out.println("Wiederholen Sie den Vorgang.");
+
 			}
 // bis hier
 		}
