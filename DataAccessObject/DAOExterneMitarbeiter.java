@@ -61,7 +61,7 @@ public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 
 	@Override
 	public ArrayList<ExterneMitarbeiter> selectAll() {
-		ArrayList<ExterneMitarbeiter> mitarbeiterList = new ArrayList<>();
+		ArrayList<ExterneMitarbeiter> externemitarbeiterList = new ArrayList<>();
 
 		try {
 			Connection con = MysqlDatabase.connect();
@@ -85,7 +85,7 @@ public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 
 				ExterneMitarbeiter mitarbeiter = new ExterneMitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon,
 						email, firma);
-				mitarbeiterList.add(mitarbeiter);
+				externemitarbeiterList.add(mitarbeiter);
 			}
 
 			MysqlDatabase.disconnect(con);
@@ -94,7 +94,7 @@ public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 			e.printStackTrace();
 		}
 
-		return mitarbeiterList;
+		return externemitarbeiterList;
 	}
 
 	@Override
@@ -105,22 +105,22 @@ public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 			
 			Statement stm = con.createStatement();
 			
-			String query = "SELECT * FROM mitarbeiter WHERE MitarbeiterNr= '"+t.getMitarbeiterNr()+"';";
+			String query = "SELECT * FROM externemitarbeiter WHERE MitarbeiterNr= '"+t.getMitarbeiterNr()+"';";
 			
 			ResultSet result = stm.executeQuery(query);
 			
 			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
 		
 			while(result.next()) {
-			int mitarbeiterNr = result.getInt("MitarbeiterNr ");
-			String vorname = result.getString("Vorname ");
-			String nachname = result.getString("Nachname ");
-			String strasse = result.getString("Strasse ");
-			String plz = result.getString("PLZ ");
-			String ort = result.getString("Ort ");
-			String telefon = result.getString("Telefon ");
-			String email = result.getString("Email ");
-			String firma = result.getString("Firma ");
+			int mitarbeiterNr = result.getInt("MitarbeiterNr");
+			String vorname = result.getString("Vorname");
+			String nachname = result.getString("Nachname");
+			String strasse = result.getString("Strasse");
+			String plz = result.getString("PLZ");
+			String ort = result.getString("Ort");
+			String telefon = result.getString("Telefon");
+			String email = result.getString("Email");
+			String firma = result.getString("Firma");
 
 			externeMitarbeiter = new ExterneMitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon, email, firma);
 			}

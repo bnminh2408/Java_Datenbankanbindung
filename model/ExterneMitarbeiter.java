@@ -25,8 +25,9 @@ public class ExterneMitarbeiter extends Mitarbeiter {
 
 	@Override
 	public String toString() {
-		return "ExterneMitarbeiter [firma=" + firma + "]";
+		return  super.toString() + ", Firma= " + firma;
 	}
+
 	
 	
 }

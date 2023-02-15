@@ -34,9 +34,13 @@ public class Kunden extends Mitarbeiter {
 
 	@Override
 	public String toString() {
-		return "Kunden [branche=" + branche + ", kundenNr=" + kundenNr + "]";
+		return "KundenNr= " + kundenNr + ", Vorname= " + getVorname() + ", Nachname= " + getNachname()
+				+ ", Strasse= " + getStrasse() + ", Plz= " + getPlz() + ", Ort= " + getOrt() + ", Telefon= " 
+				+ getTelefon() + ", Email= " + getEmail() + ", Branche= " + branche ;
 	}
+	
 
+	
 	
 	
 }

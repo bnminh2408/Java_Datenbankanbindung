@@ -86,8 +86,8 @@ public class Mitarbeiter {
 	
 	@Override
 	public String toString() {
-		return "Mitarbeiter [mitarbeiterNr=" + mitarbeiterNr + ", vorname=" + vorname + ", nachname=" + nachname
-				+ ", strasse=" + strasse + ", plz=" + plz + ", ort=" + ort + ", telefon=" + telefon + ", email=" + email
-				+ "]";
+		return "MitarbeiterNr= " + mitarbeiterNr + ", Vorname= " + vorname + ", Nachname= " + nachname
+				+ ", Strasse= " + strasse + ", Plz= " + plz + ", Ort= " + ort + ", Telefon= " 
+				+ telefon + ", Email= " + email;
 	}
 }

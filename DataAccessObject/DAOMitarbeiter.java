@@ -23,7 +23,8 @@ public class DAOMitarbeiter implements DAOInterface<Mitarbeiter> {
 			
 			int result = stm.executeUpdate(query);
 			
-			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
+			System.out.println("Du hast neue Mitarbeiter zugefuegt.\n"
+					+ "Folgende Code wurde eingegeben: " + query);
 			System.out.println("Es wurden: " + result + " Daten hinzugefuegt.");
 			MysqlDatabase.disconnect(con);
 			
@@ -73,7 +74,8 @@ public class DAOMitarbeiter implements DAOInterface<Mitarbeiter> {
 
 			int result = stm.executeUpdate(query);
 
-			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
+			System.out.println("Du hast neue Mitarbeiter geloescht.\n"
+					+ "Folgende Code wurde eingegeben: " + query);
 			System.out.println("Es wurden: " + result + " Daten geloesch.");
 
 			MysqlDatabase.disconnect(con);
@@ -93,7 +95,7 @@ public class DAOMitarbeiter implements DAOInterface<Mitarbeiter> {
 
 			Statement stm = con.createStatement();
 
-			String query = "SELECT * FROM externemitarbeiter ";
+			String query = "SELECT * FROM mitarbeiter ";
 
 			ResultSet result = stm.executeQuery(query);
 
@@ -134,8 +136,7 @@ public class DAOMitarbeiter implements DAOInterface<Mitarbeiter> {
 			
 			ResultSet result = stm.executeQuery(query);
 			
-			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
-			System.out.println("Es wurden: " + result + " Daten hinzugefuegt.");
+			System.out.println("Folgende Code wurde eingegeben: " + query);
 			
 			while(result.next()) {
 			int mitarbeiterNr = result.getInt("MitarbeiterNr");
