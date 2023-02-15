@@ -1,7 +1,7 @@
 package model;
 
 public class Mitarbeiter {
-	
+
 	private int mitarbeiterNr;
 	private String vorname, nachname, strasse, plz, ort, telefon, email;
 	
@@ -82,5 +82,12 @@ public class Mitarbeiter {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@Override
+	public String toString() {
+		return "MitarbeiterNr= " + mitarbeiterNr + ", Vorname= " + vorname + ", Nachname= " + nachname
+				+ ", Strasse= " + strasse + ", Plz= " + plz + ", Ort= " + ort + ", Telefon= " 
+				+ telefon + ", Email= " + email;
 	}
 }

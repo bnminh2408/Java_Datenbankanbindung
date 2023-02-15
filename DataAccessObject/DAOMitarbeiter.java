@@ -1,6 +1,7 @@
 package DataAccessObject;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -22,7 +23,8 @@ public class DAOMitarbeiter implements DAOInterface<Mitarbeiter> {
 			
 			int result = stm.executeUpdate(query);
 			
-			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
+			System.out.println("Du hast neue Mitarbeiter zugefuegt.\n"
+					+ "Folgende Code wurde eingegeben: " + query);
 			System.out.println("Es wurden: " + result + " Daten hinzugefuegt.");
 			MysqlDatabase.disconnect(con);
 			
@@ -31,7 +33,7 @@ public class DAOMitarbeiter implements DAOInterface<Mitarbeiter> {
 		}
 	}
 
-	@Override
+	/* @Override
 	public int update(Mitarbeiter t) {
 		try {
 			Connection con = MysqlDatabase.connect();
@@ -59,24 +61,104 @@ public class DAOMitarbeiter implements DAOInterface<Mitarbeiter> {
 			e.printStackTrace();
 		}
 		return 0;
-	}
+	} */
 
 	@Override
-	public int delete(Mitarbeiter t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void delete(Mitarbeiter t) {
+		try {
+			Connection con = MysqlDatabase.connect();
+
+			Statement stm = con.createStatement();
+
+			String query = "DELETE FROM  mitarbeiter WHERE " + "MitarbeiterNr='" + t.getMitarbeiterNr() + "'";
+
+			int result = stm.executeUpdate(query);
+
+			System.out.println("Du hast neue Mitarbeiter geloescht.\n"
+					+ "Folgende Code wurde eingegeben: " + query);
+			System.out.println("Es wurden: " + result + " Daten geloesch.");
+
+			MysqlDatabase.disconnect(con);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
 	public ArrayList<Mitarbeiter> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Mitarbeiter> mitarbeiterList = new ArrayList<>();
+
+		try {
+			Connection con = MysqlDatabase.connect();
+
+			Statement stm = con.createStatement();
+
+			String query = "SELECT * FROM mitarbeiter ";
+
+			ResultSet result = stm.executeQuery(query);
+
+			while (result.next()) {
+				int mitarbeiterNr = result.getInt("MitarbeiterNr");
+				String vorname = result.getString("Vorname");
+				String nachname = result.getString("Nachname");
+				String strasse = result.getString("Strasse");
+				String plz = result.getString("PLZ");
+				String ort = result.getString("Ort");
+				String telefon = result.getString("Telefon");
+				String email = result.getString("Email");
+
+				Mitarbeiter mitarbeiter = new Mitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon,
+						email);
+				mitarbeiterList.add(mitarbeiter);
+			}
+
+			MysqlDatabase.disconnect(con);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mitarbeiterList;
+		
 	}
 
 	@Override
-	public Mitarbeiter selectById() {
-		// TODO Auto-generated method stub
-		return null;
+	public Mitarbeiter selectById(Mitarbeiter t)  {
+		Mitarbeiter mitarbeiter = null ;
+		try {
+			Connection con = MysqlDatabase.connect();
+			
+			Statement stm = con.createStatement();
+			
+			String query = "SELECT * FROM mitarbeiter WHERE MitarbeiterNr= '"+t.getMitarbeiterNr()+"';";
+			
+			ResultSet result = stm.executeQuery(query);
+			
+			System.out.println("Folgende Code wurde eingegeben: " + query);
+			
+			while(result.next()) {
+			int mitarbeiterNr = result.getInt("MitarbeiterNr");
+			String vorname = result.getString("Vorname");
+			String nachname = result.getString("Nachname");
+			String strasse = result.getString("Strasse");
+			String plz = result.getString("PLZ");
+			String ort = result.getString("Ort");
+			String telefon = result.getString("Telefon");
+			String email = result.getString("Email");
+
+			mitarbeiter = new Mitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon, email);
+			}
+			
+			
+			MysqlDatabase.disconnect(con);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mitarbeiter ;
+		
 	}
 
 }

@@ -1,55 +1,136 @@
 package DataAccessObject;
 
 import java.sql.Connection;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import Database.MysqlDatabase;
 import model.ExterneMitarbeiter;
+import model.Mitarbeiter;
 
 public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 
 	@Override
 	public void insert(ExterneMitarbeiter t) {
-		Connection con = MysqlDatabase.connect();
 		try {
-			Statement st = con.createStatement();
-			String query = "INSERT INTO Mitarbeiter (mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon, email, firma)"
-					+ "VALUE(" + t.getMitarbeiterNr() + " , " + t.getVorname() + " , " + t.getNachname() + " , "
-					+ t.getStrasse() + " , " + t.getPlz() + " , " + t.getOrt() + " , " + t.getTelefon() + " , "
-					+ t.getEmail() + " , " + t.getFirma() + ")";
-			int result = st.executeUpdate(query);
+			Connection con = MysqlDatabase.connect();
+
+			Statement stm = con.createStatement();
+
+			String query = "INSERT INTO externemitarbeiter VALUE('" + t.getMitarbeiterNr() + "' , '" + t.getVorname()
+					+ "' , '" + t.getNachname() + "' , '" + t.getStrasse() + "' , '" + t.getPlz() + "' , '" + t.getOrt()
+					+ "' , '" + t.getTelefon() + "' , '" + t.getEmail() + "' , '" + t.getFirma() + "')";
+
+			int result = stm.executeUpdate(query);
+
 			System.out.println("Du hast neue externen Mitarbeiter zugefügt. Folgende Code wurde eingegeben: " + query);
-			System.out.println("Das " + " wurde geändert ");
+			System.out.println("Das " + result + " wurde geändert ");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
-	@Override
-	public int update(ExterneMitarbeiter t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public int update(ExterneMitarbeiter t) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 	@Override
-	public int delete(ExterneMitarbeiter t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void delete(ExterneMitarbeiter t) {
+		try {
+			Connection con = MysqlDatabase.connect();
+
+			Statement stm = con.createStatement();
+
+			String query = "DELETE FROM  externemitarbeiter WHERE " + "MitarbeiterNr='" + t.getMitarbeiterNr() + "'";
+
+			int result = stm.executeUpdate(query);
+
+			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
+			System.out.println("Es wurden: " + result + " Daten geloesch.");
+
+			MysqlDatabase.disconnect(con);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public ArrayList<ExterneMitarbeiter> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ExterneMitarbeiter> externemitarbeiterList = new ArrayList<>();
+
+		try {
+			Connection con = MysqlDatabase.connect();
+
+			Statement stm = con.createStatement();
+
+			String query = "SELECT * FROM externemitarbeiter ";
+
+			ResultSet result = stm.executeQuery(query);
+
+			while (result.next()) {
+				int mitarbeiterNr = result.getInt("MitarbeiterNr");
+				String vorname = result.getString("Vorname");
+				String nachname = result.getString("Nachname");
+				String strasse = result.getString("Strasse");
+				String plz = result.getString("PLZ");
+				String ort = result.getString("Ort");
+				String telefon = result.getString("Telefon");
+				String email = result.getString("Email");
+				String firma = result.getString("Firma");
+
+				ExterneMitarbeiter mitarbeiter = new ExterneMitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon,
+						email, firma);
+				externemitarbeiterList.add(mitarbeiter);
+			}
+
+			MysqlDatabase.disconnect(con);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return externemitarbeiterList;
 	}
 
 	@Override
-	public ExterneMitarbeiter selectById() {
-		// TODO Auto-generated method stub
-		return null;
+	public ExterneMitarbeiter selectById(ExterneMitarbeiter t) {
+		ExterneMitarbeiter externeMitarbeiter = null ;
+		try {
+			Connection con = MysqlDatabase.connect();
+			
+			Statement stm = con.createStatement();
+			
+			String query = "SELECT * FROM externemitarbeiter WHERE MitarbeiterNr= '"+t.getMitarbeiterNr()+"';";
+			
+			ResultSet result = stm.executeQuery(query);
+			
+			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
+		
+			while(result.next()) {
+			int mitarbeiterNr = result.getInt("MitarbeiterNr");
+			String vorname = result.getString("Vorname");
+			String nachname = result.getString("Nachname");
+			String strasse = result.getString("Strasse");
+			String plz = result.getString("PLZ");
+			String ort = result.getString("Ort");
+			String telefon = result.getString("Telefon");
+			String email = result.getString("Email");
+			String firma = result.getString("Firma");
+
+			externeMitarbeiter = new ExterneMitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon, email, firma);
+			}
+			
+			MysqlDatabase.disconnect(con);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return externeMitarbeiter ;
 	}
 
 }
