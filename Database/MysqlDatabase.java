@@ -24,7 +24,7 @@ public class MysqlDatabase {
 		Connection connection = null;
 		try {
 			connection = DriverManager.getConnection(url, username, password);
-			//System.out.println("Successfully connected to database.");
+			// System.out.println("Successfully connected to database.");
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -38,7 +38,7 @@ public class MysqlDatabase {
 		try {
 			if (connection != null) {
 				connection.close();
-				//System.out.println("Disconnected to database.");
+				// System.out.println("Disconnected to database.");
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

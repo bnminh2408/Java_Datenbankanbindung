@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import Database.MysqlDatabase;
 import model.ExterneMitarbeiter;
-import model.Mitarbeiter;
 
 public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 
@@ -73,7 +72,7 @@ public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 			ResultSet result = stm.executeQuery(query);
 
 			while (result.next()) {
-				int mitarbeiterNr = result.getInt("MitarbeiterNr");
+				String mitarbeiterNr = result.getString("MitarbeiterNr");
 				String vorname = result.getString("Vorname");
 				String nachname = result.getString("Nachname");
 				String strasse = result.getString("Strasse");
@@ -83,8 +82,8 @@ public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 				String email = result.getString("Email");
 				String firma = result.getString("Firma");
 
-				ExterneMitarbeiter mitarbeiter = new ExterneMitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon,
-						email, firma);
+				ExterneMitarbeiter mitarbeiter = new ExterneMitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz,
+						ort, telefon, email, firma);
 				externemitarbeiterList.add(mitarbeiter);
 			}
 
@@ -99,38 +98,39 @@ public class DAOExterneMitarbeiter implements DAOInterface<ExterneMitarbeiter> {
 
 	@Override
 	public ExterneMitarbeiter selectById(ExterneMitarbeiter t) {
-		ExterneMitarbeiter externeMitarbeiter = null ;
+		ExterneMitarbeiter externeMitarbeiter = null;
 		try {
 			Connection con = MysqlDatabase.connect();
-			
-			Statement stm = con.createStatement();
-			
-			String query = "SELECT * FROM externemitarbeiter WHERE MitarbeiterNr= '"+t.getMitarbeiterNr()+"';";
-			
-			ResultSet result = stm.executeQuery(query);
-			
-			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
-		
-			while(result.next()) {
-			int mitarbeiterNr = result.getInt("MitarbeiterNr");
-			String vorname = result.getString("Vorname");
-			String nachname = result.getString("Nachname");
-			String strasse = result.getString("Strasse");
-			String plz = result.getString("PLZ");
-			String ort = result.getString("Ort");
-			String telefon = result.getString("Telefon");
-			String email = result.getString("Email");
-			String firma = result.getString("Firma");
 
-			externeMitarbeiter = new ExterneMitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon, email, firma);
+			Statement stm = con.createStatement();
+
+			String query = "SELECT * FROM externemitarbeiter WHERE MitarbeiterNr= '" + t.getMitarbeiterNr() + "';";
+
+			ResultSet result = stm.executeQuery(query);
+
+			System.out.println("Folgende Code wurde eingegeben: " + query);
+
+			while (result.next()) {
+				String mitarbeiterNr = result.getString("MitarbeiterNr");
+				String vorname = result.getString("Vorname");
+				String nachname = result.getString("Nachname");
+				String strasse = result.getString("Strasse");
+				String plz = result.getString("PLZ");
+				String ort = result.getString("Ort");
+				String telefon = result.getString("Telefon");
+				String email = result.getString("Email");
+				String firma = result.getString("Firma");
+
+				externeMitarbeiter = new ExterneMitarbeiter(mitarbeiterNr, vorname, nachname, strasse, plz, ort,
+						telefon, email, firma);
 			}
-			
+
 			MysqlDatabase.disconnect(con);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return externeMitarbeiter ;
+		return externeMitarbeiter;
 	}
 
 }

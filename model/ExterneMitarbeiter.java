@@ -3,13 +3,12 @@ package model;
 public class ExterneMitarbeiter extends Mitarbeiter {
 
 	private String firma;
-	
 
 	public ExterneMitarbeiter() {
 		super();
 	}
-	
-	public ExterneMitarbeiter(int mitarbeiterNr, String vorname, String nachname, String strasse, String plz,
+
+	public ExterneMitarbeiter(String mitarbeiterNr, String vorname, String nachname, String strasse, String plz,
 			String ort, String telefon, String email, String firma) {
 		super(mitarbeiterNr, vorname, nachname, strasse, plz, ort, telefon, email);
 		this.firma = firma;
@@ -25,9 +24,7 @@ public class ExterneMitarbeiter extends Mitarbeiter {
 
 	@Override
 	public String toString() {
-		return  super.toString() + ", Firma= " + firma;
+		return super.toString() + ", Firma= " + firma;
 	}
 
-	
-	
 }
