@@ -9,11 +9,11 @@ public class Kunden extends Mitarbeiter {
 		super();
 	}
 
-	public Kunden( int kundenNr, String vorname, String nachname, String strasse, String plz, String ort,
+	public Kunden(String kundenNr, String vorname, String nachname, String strasse, String plz, String ort,
 			String telefon, String email, String branche) {
-		super(0, vorname, nachname, strasse, plz, ort, telefon, email);
+		super(kundenNr, vorname, nachname, strasse, plz, ort, telefon, email);
 		this.branche = branche;
-		this.kundenNr = kundenNr;
+		this.kundenNr = Integer.parseInt(kundenNr);
 	}
 
 	public int getKundenNr() {
@@ -34,13 +34,9 @@ public class Kunden extends Mitarbeiter {
 
 	@Override
 	public String toString() {
-		return "KundenNr= " + kundenNr + ", Vorname= " + getVorname() + ", Nachname= " + getNachname()
-				+ ", Strasse= " + getStrasse() + ", Plz= " + getPlz() + ", Ort= " + getOrt() + ", Telefon= " 
-				+ getTelefon() + ", Email= " + getEmail() + ", Branche= " + branche ;
+		return "KundenNr= " + kundenNr + ", Vorname= " + getVorname() + ", Nachname= " + getNachname() + ", Strasse= "
+				+ getStrasse() + ", Plz= " + getPlz() + ", Ort= " + getOrt() + ", Telefon= " + getTelefon()
+				+ ", Email= " + getEmail() + ", Branche= " + branche;
 	}
-	
 
-	
-	
-	
 }

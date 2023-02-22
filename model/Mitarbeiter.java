@@ -4,20 +4,20 @@ public class Mitarbeiter {
 
 	private int mitarbeiterNr;
 	private String vorname, nachname, strasse, plz, ort, telefon, email;
-	
-	public Mitarbeiter() {	
+
+	public Mitarbeiter() {
 	}
 
-	public Mitarbeiter(int mitarbeiterNr , String vorname, String nachname, String strasse, String plz, String ort,
+	public Mitarbeiter(String mitarbeiterNr, String vorname, String nachname, String strasse, String plz, String ort,
 			String telefon, String email) {
-		this.mitarbeiterNr = mitarbeiterNr;
+		this.mitarbeiterNr = Integer.parseInt(mitarbeiterNr);
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.strasse = strasse;
 		this.plz = plz;
 		this.ort = ort;
 		this.telefon = telefon;
-		this.email = email;	
+		this.email = email;
 	}
 
 	public int getMitarbeiterNr() {
@@ -83,11 +83,10 @@ public class Mitarbeiter {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "MitarbeiterNr= " + mitarbeiterNr + ", Vorname= " + vorname + ", Nachname= " + nachname
-				+ ", Strasse= " + strasse + ", Plz= " + plz + ", Ort= " + ort + ", Telefon= " 
-				+ telefon + ", Email= " + email;
+		return "MitarbeiterNr= " + mitarbeiterNr + ", Vorname= " + vorname + ", Nachname= " + nachname + ", Strasse= "
+				+ strasse + ", Plz= " + plz + ", Ort= " + ort + ", Telefon= " + telefon + ", Email= " + email;
 	}
 }

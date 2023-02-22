@@ -70,7 +70,7 @@ public class DAOKunde extends Mitarbeiter implements DAOInterface<Kunden> {
 			ResultSet result = stm.executeQuery(query);
 
 			while (result.next()) {
-				int kundenNr = result.getInt("KundenNr");
+				String kundenNr = result.getString("KundenNr");
 				String vorname = result.getString("Vorname");
 				String nachname = result.getString("Nachname");
 				String strasse = result.getString("Strasse");
@@ -101,12 +101,12 @@ public class DAOKunde extends Mitarbeiter implements DAOInterface<Kunden> {
 
 			Statement stm = con.createStatement();
 
-			String query = "SELECT * FROM mitarbeiter WHERE MitarbeiterNr= '" + t.getMitarbeiterNr() + "';";
+			String query = "SELECT * FROM kunden WHERE KundenNr= '" + t.getKundenNr() + "';";
 
 			ResultSet result = stm.executeQuery(query);
 
 			while (result.next()) {
-				int kundenNr = result.getInt("KundenNr");
+				String kundenNr = result.getString("KundenNr");
 				String vorname = result.getString("Vorname");
 				String nachname = result.getString("Nachname");
 				String strasse = result.getString("Strasse");
@@ -116,10 +116,10 @@ public class DAOKunde extends Mitarbeiter implements DAOInterface<Kunden> {
 				String email = result.getString("Email");
 				String branche = result.getString("Branche");
 
-				kunden  = new Kunden(kundenNr, vorname, nachname, strasse, plz, ort, telefon, email, branche);
+				kunden = new Kunden(kundenNr, vorname, nachname, strasse, plz, ort, telefon, email, branche);
 			}
 
-			System.out.println("Du hast neue Mitarbeiter zugefuegt. Folgende Code wurde eingegeben: " + query);
+			System.out.println(" Folgende Code wurde eingegeben: " + query + "\n");
 
 			MysqlDatabase.disconnect(con);
 
